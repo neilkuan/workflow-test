@@ -59,10 +59,6 @@ jobs:
         with:
           debug: true
           script: |
-            console.log(context.repo.owner);
-            console.log(context.repo.repo);
-            console.log(context.sha);
-            
             const response = await github.rest.checks.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -72,4 +68,16 @@ jobs:
               conclusion: process.env.CONCLUSION
             });
             
-            console.log(response);
+            console.log(response);git
+      # - name: Update status check
+      #   run: "curl -i -v --fail -H \"Accept: application/vnd.github.v3+json\" -H
+      #     \"Authorization: token ${GITHUB_TOKEN}\"
+      #     https://api.github.com/repos/${{ github.repository }}/check-runs -d
+      #     '{\"name\":\"build\",\"head_sha\":\"${{ github.head_ref || github.ref_name }}\",\"status\
+      #     \":\"completed\",\"conclusion\":\"${{ needs.validate.outputs.conclusion
+      #     }}\",\"output\":{\"title\":\"Created via the pull-request-lint
+      #     workflow.\",\"summary\":\"Action run URL: https://github.com/${{
+      #     github.repository }}/actions/runs/${{ github.run_id }}\"}}'"
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
