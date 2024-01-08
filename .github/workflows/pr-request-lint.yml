@@ -66,7 +66,7 @@ jobs:
             const response = await github.rest.checks.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              head_sha: context.ref,
+              head_sha: process.env.PR_BRANCH,
               name: "build",
               status: "completed",
               conclusion: process.env.CONCLUSION
