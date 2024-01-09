@@ -1,4 +1,4 @@
-name: test
+name: test-echo
 on:
   pull_request_target:
     types:
