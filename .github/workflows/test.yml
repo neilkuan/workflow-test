@@ -10,7 +10,7 @@ on:
       - edited
 jobs:
   test-echo:
-    name: Test Echo job
+    name: test-echo
     runs-on: ubuntu-latest
     steps:
       - run: "echo hello world..."
