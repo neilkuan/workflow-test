@@ -70,7 +70,7 @@ jobs:
               conclusion: process.env.CONCLUSION,
               output: {
                 title: "Created via the pull-request-lint workflow.",
-                summary: `Action run URL: "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUNNER_ID}"`
+                summary: `Action run URL: "https://github.com/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUNNER_ID}"`
               }
             });
             
