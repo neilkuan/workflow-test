@@ -1,0 +1,16 @@
+name: test
+on:
+  pull_request_target:
+    types:
+      - labeled
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+      - edited
+jobs:
+  test-echo:
+    name: Test Echo job
+    runs-on: ubuntu-latest
+    steps:
+      - run: "echo hello world..."
