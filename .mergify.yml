@@ -4,6 +4,7 @@ queue_rules:
       - "#approved-reviews-by>=1"
       - -label~=(do-not-merge)
       - status-success=build
+      - status-success=test-echo
 
 pull_request_rules:
   - name: Automatic merge on approval and successful build
@@ -11,6 +12,7 @@ pull_request_rules:
       - "#approved-reviews-by>=1"
       - -label~=(do-not-merge)
       - status-success=build
+      - status-success=test-echo
     actions:
       queue:
         method: squash
