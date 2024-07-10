@@ -18,6 +18,10 @@ jobs:
     name: test-echo 2 1
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          ls -alR
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ steps.var.outputs.GITHUB_HEAD_REF }}
+    - run: |
+       ls -alR
       
