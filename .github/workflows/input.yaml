@@ -1,3 +1,4 @@
+name: inputs-workflow-lab
 on:
   workflow_dispatch:
     inputs:
