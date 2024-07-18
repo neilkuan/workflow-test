@@ -1,0 +1,14 @@
+on:
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'True to print to STDOUT'
+        required: true
+        type: string
+
+jobs:
+  print-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print the input tag to STDOUT
+        run: echo  The tags are ${{ inputs.tags }} 
