@@ -1,13 +1,13 @@
 name: pull-request-lint
 on:
-  pull_request_target:
-    types:
-      - labeled
-      - opened
-      - synchronize
-      - reopened
-      - ready_for_review
-      - edited
+  # pull_request_target:
+  #   types:
+  #     - labeled
+  #     - opened
+  #     - synchronize
+  #     - reopened
+  #     - ready_for_review
+  #     - edited
   pull_request:
     # Trigger the worflow on pull request event for main branch
     branches:
