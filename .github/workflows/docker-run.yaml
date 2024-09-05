@@ -35,7 +35,7 @@ jobs:
           sudo ctr image pull public.ecr.aws/nginx/nginx:latest
           sudo ctr image mount public.ecr.aws/nginx/nginx:latest test-path
           ls test-path/etc/nginx/nginx.conf 
-          cp test-path/etc/nginx/nginx.conf .
+          cp test-path/etc/nginx/nginx.conf test-path-nginx.conf
       - name: ls
         run: |
           ls -la
