@@ -29,3 +29,6 @@ jobs:
       - name: copy nginx config with docker build
         run: |
           docker build --output type=tar,dest=build.tar .
+      - name: ls
+        run: |
+          ls -la
