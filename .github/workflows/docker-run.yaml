@@ -34,7 +34,7 @@ jobs:
           mkdir test-path
           sudo ctr image pull public.ecr.aws/nginx/nginx:latest
           sudo ctr image mount public.ecr.aws/nginx/nginx:latest test-path
-          ls test-path
+          ls test-path/nginx/
       - name: ls
         run: |
           ls -la
