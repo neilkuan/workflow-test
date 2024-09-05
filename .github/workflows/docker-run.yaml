@@ -32,8 +32,8 @@ jobs:
       - name: ctr lab
         run: |
           mkdir test-path
-          sudo ctr image pull docker.io/nginx:latest
-          sudo ctr image mount docker.io/nginx:latest test-path
+          sudo ctr image pull public.ecr.aws/nginx/nginx:latest
+          sudo ctr image mount public.ecr.aws/nginx/nginx:latest test-path
           cp test-path/etc/hosts .
       - name: ls
         run: |
