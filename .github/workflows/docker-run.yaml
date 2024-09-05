@@ -29,6 +29,11 @@ jobs:
       - name: copy nginx config with docker build
         run: |
           docker build --output type=tar,dest=build.tar .
+      - name: ctr lab
+        run: |
+          mkdir test-path
+          ctr image mount nginx:latest test-path
+          cp test-path/etc/hosts .
       - name: ls
         run: |
           ls -la
