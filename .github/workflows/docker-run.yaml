@@ -32,7 +32,7 @@ jobs:
       - name: ctr lab
         run: |
           mkdir test-path
-          ctr image mount nginx:latest test-path
+          sudo ctr image mount nginx:latest test-path
           cp test-path/etc/hosts .
       - name: ls
         run: |
