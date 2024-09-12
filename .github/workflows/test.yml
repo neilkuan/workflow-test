@@ -13,7 +13,7 @@ jobs:
     name: test echo
     runs-on: ubuntu-latest
     steps:
-      - run: "echo hello world..."
+      - run: "echo hello world...123"
   test-echo2:
     name: test-echo 2 1
     runs-on: ubuntu-latest
