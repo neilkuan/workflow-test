@@ -1,0 +1,41 @@
+name: 'Build image and export code'
+on:
+  push:
+    branches:
+      - master
+      - main
+      - develop
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build:
+    name: Build image and upload code to s3
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: copy nginx config
+        run: |
+          docker run --name nginx --entrypoint="" -d nginx tail -f /etc/hosts
+          docker cp nginx:/etc/hosts .
+          docker rm -f nginx
+      - name: copy nginx config with docker buildx
+        run: |
+          docker build --output type=tar,dest=buildx.tar .
+      - name: copy nginx config with docker build
+        run: |
+          docker build --output type=tar,dest=build.tar .
+      - name: ctr lab
+        run: |
+          mkdir test-path
+          sudo ctr image pull public.ecr.aws/nginx/nginx:latest
+          sudo ctr image mount public.ecr.aws/nginx/nginx:latest test-path
+          ls test-path/etc/nginx/nginx.conf 
+          cp test-path/etc/nginx/nginx.conf test-path-nginx.conf
+      - name: ls
+        run: |
+          ls -la
