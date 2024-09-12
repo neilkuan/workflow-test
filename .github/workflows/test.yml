@@ -1,13 +1,10 @@
 name: test-echo
 on:
-  pull_request_target:
-    types:
-      - labeled
-      - opened
-      - synchronize
-      - reopened
-      - ready_for_review
-      - edited
+  push:
+    branches:
+      - master
+      - main
+      - develop
 jobs:
   test-echo2:
     name: test-echo 2 1
