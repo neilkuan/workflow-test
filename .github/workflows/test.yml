@@ -17,6 +17,8 @@ jobs:
   test-echo2:
     name: test-echo 2 1
     runs-on: ubuntu-latest
+    container: 
+      image: ubuntu-22.04:20240901.1.0
     steps:
     - name: Checkout
       uses: actions/checkout@v4
