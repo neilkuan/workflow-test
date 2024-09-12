@@ -16,9 +16,10 @@ jobs:
         ref: ${{ steps.var.outputs.GITHUB_HEAD_REF }}
     - name: test-docker-compose
       run: |
-       which docker || docker compose ps
+       docker compose ps
+       which docker
     - name: test-docker-compose
       run: |
-       which docker-compose || docker-compose --version
+       which docker-compose && docker-compose --version
       
       
