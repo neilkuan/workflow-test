@@ -24,4 +24,6 @@ jobs:
         ref: ${{ steps.var.outputs.GITHUB_HEAD_REF }}
     - run: |
        ls -alR
+       which docker-compose || docker-compose
+    
       
