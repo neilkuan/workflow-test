@@ -1,25 +1,22 @@
-name: test-echo
+name: Manual Trigger Workflow
+
 on:
-  push:
-    branches:
-      - master
-      - main
-      - develop
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Choose the branch to deploy'
+        required: true
+        default: 'main'  # 預設選擇的分支
+
 jobs:
-  test-echo2:
-    name: test-echo 2 1
+  deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        ref: ${{ steps.var.outputs.GITHUB_HEAD_REF }}
-    - name: test-docker-compose
-      run: |
-       docker compose ls
-       which docker
-    - name: test-docker-compose
-      run: |
-       which docker-compose && docker-compose --version
-      
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.branch }}  # 使用選擇的分支
+
+      - name: Run deployment script
+        run: echo "Deploying from branch ${{ github.event.inputs.branch }}"
       
