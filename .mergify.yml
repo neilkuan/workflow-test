@@ -1,6 +1,11 @@
 queue_rules:
   - name: default
-    conditions:
+    queue_conditions:
+      - "#approved-reviews-by>=1"
+      - -label~=(do-not-merge)
+      - status-success=build
+      - status-success="test echo"
+    merge_conditions:
       - "#approved-reviews-by>=1"
       - -label~=(do-not-merge)
       - status-success=build
@@ -10,23 +15,13 @@ queue_rules:
       # - status-success=workflow.jobs.[id].name
       # https://github.com/neilkuan/workflow-test/blob/7c3c7bac1dd8cd7a2d07278e6a383cb7ae5782d0/.github/workflows/test.yml#L13
       - status-success="test echo"
+    commit_message_template: |-
+      {{ title }} (#{{ number }})
+      {{ body }}
+    merge_method: squash
 
 pull_request_rules:
   - name: Automatic merge on approval and successful build
-    conditions:
-      - "#approved-reviews-by>=1"
-      - -label~=(do-not-merge)
-      - status-success=build
-      # check ".github/workflows/test.yml"
-      # - status-success=workflow.jobs.[id-name]
-      # or
-      # - status-success=workflow.jobs.[id].name
-      # https://github.com/neilkuan/workflow-test/blob/7c3c7bac1dd8cd7a2d07278e6a383cb7ae5782d0/.github/workflows/test.yml#L13
-      - status-success="test echo"
+    conditions: []
     actions:
       queue:
-        method: squash
-        name: default
-        commit_message_template: |-
-          {{ title }} (#{{ number }})
-          {{ body }}
