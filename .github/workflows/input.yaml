@@ -13,3 +13,10 @@ jobs:
     steps:
       - name: Print the input tag to STDOUT
         run: echo  The tags are ${{ inputs.tags }} 
+      - name: trigger another workflow
+        run: |
+          curl -X POST \
+          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/neilkuan/workflow-test/actions/workflows/docker-run.yaml/dispatches \
+          -d '{"ref":"main"}'
