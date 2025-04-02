@@ -6,7 +6,10 @@ on:
         description: 'True to print to STDOUT'
         required: true
         type: string
-
+permissions:
+  contents: read
+  actions: read
+  
 jobs:
   print-tag:
     runs-on: ubuntu-latest
