@@ -9,7 +9,7 @@ on:
   #     - ready_for_review
   #     - edited
   pull_request:
-    # Trigger the worflow on pull request event for main branch
+    # Trigger the workflow on pull request event for main branch
     branches:
       - main
 jobs:
