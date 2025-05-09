@@ -5,7 +5,7 @@ FROM nginx:alpine AS builder
 WORKDIR /app
 
 # 複製 nginx 配置文件
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY ./nginx.conf /etc/nginx/nginx.conf
 
 # 第二階段：使用更小的基礎映像
 FROM nginx:alpine
