@@ -21,9 +21,17 @@ jobs:
       - name: Install aws command
         run: |
           set -x
-          sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+          if [ "${{ runner.arch }}" = "X64" ]; then
+            ARCH_TYPE="x86_64"
+          elif [ "${{ runner.arch }}" = "ARM64" ]; then
+            ARCH_TYPE="aarch64"
+          else
+            echo "Unsupported architecture: ${{ runner.arch }}"
+            exit 1
+          fi
+          sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-${ARCH_TYPE}.zip" -o "awscliv2.zip"
           sudo unzip awscliv2.zip > /dev/null
           sudo ./aws/install --update
           env | grep AWS_
           aws --version
-      
+
