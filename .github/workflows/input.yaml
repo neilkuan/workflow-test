@@ -1,11 +1,10 @@
-name: inputs-workflow-lab
+name: "Helm Template Diff"
+
 on:
   workflow_dispatch:
-    inputs:
-      tags:
-        description: 'True to print to STDOUT'
-        required: true
-        type: string
+  pull_request:
+    types: [labeled]
+    branches: [master, main]
 permissions:
   contents: read
   actions: write
@@ -13,13 +12,21 @@ permissions:
 jobs:
   print-tag:
     runs-on: ubuntu-latest
+    if: contains(github.event.label.name, 'helm-diff')
     steps:
-      - name: Print the input tag to STDOUT
-        run: echo  The tags are ${{ inputs.tags }} 
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: trigger another workflow
         run: |
-          curl -X POST \
-          -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-          -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/neilkuan/workflow-test/actions/workflows/docker-run.yaml/dispatches \
-          -d '{"ref":"main"}'
+          # 取得 target branch (通常是 master) 的最新 commit
+          TARGET_COMMIT=$(git rev-parse origin/${{ github.event.pull_request.base.ref }})
+          # 取得 PR 的最新 commit
+          PR_COMMIT=$(git rev-parse ${{ github.event.pull_request.head.sha }})
+          
+          echo "Target branch: ${{ github.event.pull_request.base.ref }}"
+          echo "Target commit: $TARGET_COMMIT"
+          echo "PR commit: $PR_COMMIT"
+          export LABEL="${{ github.event.label.name }}"
+          echo "The label is ${{ github.event.label.name }}"
