@@ -32,6 +32,7 @@ jobs:
           sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-${ARCH_TYPE}.zip" -o "awscliv2.zip"
           sudo unzip awscliv2.zip > /dev/null
           sudo ./aws/install --update
-          env | grep AWS_
+          
           aws --version
+          sleep 20
 
