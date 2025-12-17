@@ -7,6 +7,7 @@ on:
         description: 'Choose the branch to deploy'
         required: true
         default: 'main'  # 預設選擇的分支
+run-name: Manual Trigger Workflow run on branch ${{ inputs.branch }}
 
 jobs:
   deploy:
