@@ -1,10 +1,10 @@
 name: 'Build image and export code'
 on:
-  push:
-    branches:
-      - master
-      - main
-      - develop
+  # push:
+  #   branches:
+  #     - master
+  #     - main
+  #     - develop
   workflow_dispatch:
 permissions:
   id-token: write

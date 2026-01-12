@@ -17,3 +17,13 @@ jobs:
         run: |
           echo "Tag Workflow"
           env
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: check this tag commit at which branch
+        run: |
+          # check this tag commit at which branch
+          git branch -r --contains ${{ github.ref_name }}
+          # get the branch name
+          BRANCH_NAME=$(git branch -r --contains ${{ github.ref_name }} | awk -F/ '{print $2}')
+          echo "Branch Name: $BRANCH_NAME"
