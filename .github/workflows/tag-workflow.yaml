@@ -1,0 +1,19 @@
+name: Tag Workflow
+
+on:
+  push:
+    tags:
+      - v*
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  tag:
+    name: Tag Workflow
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tag Workflow
+        run: |
+          echo "Tag Workflow"
+          env
